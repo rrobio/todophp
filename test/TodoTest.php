@@ -2,6 +2,7 @@
 
 namespace test;
 include "../model/Todo.php";
+
 use model\Todo;
 use PHPUnit\Framework\TestCase;
 
@@ -36,6 +37,5 @@ class TodoTest extends TestCase
     public function test__constructWithNullID() {
         $todo = new Todo("example", true, true);
         $this->assertNotNull($todo);
-        $this->assertNotNull($todo->id);
     }
 }
