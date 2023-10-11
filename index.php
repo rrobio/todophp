@@ -23,11 +23,7 @@ function insertTodo(Todo $todo, SQLite3 $db): bool
     }
 
     $ret = $stmt->execute();
-    if (is_object($ret)) {
-        return true;
-    }
-
-    return false;
+    return is_object($ret);
 }
 
 function removeTodo(int $id, SQLite3 $db): bool
@@ -36,11 +32,7 @@ function removeTodo(int $id, SQLite3 $db): bool
     $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 
     $result = $stmt->execute();
-    if (is_object($result)) {
-        return true;
-    }
-
-    return false;
+    return is_object($result);
 }
 
 function toggleStatus(int $id, string $status, SQLite3 $db): bool
