@@ -104,7 +104,8 @@ if (isset($_GET['toggledone'])) {
 </div>
 <div id="app">
     <?php
-    $items = $db->query('SELECT * FROM todo');
+    $stmt = $db->prepare('SELECT * FROM todo');
+    $items = $stmt->execute();
 
     while ($row = $items->fetchArray()) {
         $todo = new Todo($row['text'], (bool)$row['done'], (bool)$row['skip'], $row['id']);
