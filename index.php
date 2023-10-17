@@ -1,7 +1,11 @@
 <?php
 declare(strict_types=1);
 
-include("model/Todo.php");
+spl_autoload_register(function ($class) {
+    $file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+    require $file;
+});
+
 include("model/todoElement.php");
 
 use model\Todo;
