@@ -53,8 +53,7 @@ function toggleStatus(int $id, string $status, SQLite3 $db): bool
             ':status' => [intval($state), SQLITE3_INTEGER],
             ':id' => [$id, SQLITE3_INTEGER]
         );
-        $whatStatus = $status == 'done' ? 'done' : 'skip';
-        $stmt = $db->prepare('UPDATE todo SET ' . $whatStatus . ' = :status WHERE id=:id;');
+        $stmt = $db->prepare('UPDATE todo SET ' . $status . ' = :status WHERE id=:id;');
 
         foreach ($binds as $key => $value) {
             $stmt->bindValue($key, $value[0], $value[1]);
