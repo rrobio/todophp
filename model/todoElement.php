@@ -25,10 +25,10 @@ function _generateCheck(DOMDocument $dom, Todo $todo, string $type): DOMElement 
     $toggleButton->setAttribute('onChange', 'this.form.submit()');
 
     $labelCheck->setAttribute('type', 'checkbox');
-    if ($type === 'done' && $todo->done) {
+    if ($type === 'Done' && $todo->done) {
        $labelCheck->setAttribute('checked', '1');
     }
-    if ($type === 'skip' && $todo->skip) {
+    if ($type === 'Skip' && $todo->skip) {
         $labelCheck->setAttribute('checked', '1');
     }
 
