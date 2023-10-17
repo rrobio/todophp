@@ -55,7 +55,7 @@ function _generateDeleteButton(DOMDocument $dom, Todo $todo): DOMElement {
 
     $input->setAttribute('id', $buttonID);
     $label->setAttribute('for', $buttonID);
-    $label->append($dom->createTextNode('delete'));
+    $label->append($dom->createTextNode('Delete'));
     $input->textContent = 'X';
 
     $span->append($input, $label);
@@ -79,8 +79,8 @@ function generateNode(Todo $todo): DOMDocument {
         $form = $dom->createElement('form');
         $form->setAttribute('action', 'index.php');
 
-        $form->append(_generateCheck($dom, $todo, 'done'),
-                     _generateCheck($dom, $todo, 'skip'),
+        $form->append(_generateCheck($dom, $todo, 'Done'),
+                     _generateCheck($dom, $todo, 'Skip'),
                      _generateDeleteButton($dom, $todo),
                      _generateText($dom, $todo)
         );

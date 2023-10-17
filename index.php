@@ -49,7 +49,7 @@ function toggleStatus(int $id, string $status, SQLite3 $db): bool
             ':status' => [intval($state), SQLITE3_INTEGER],
             ':id' => [$id, SQLITE3_INTEGER]
         );
-        $whatStatus = $status=='done'?'done':'skip';
+        $whatStatus = $status == 'done' ? 'done' : 'skip';
         $stmt = $db->prepare('UPDATE todo SET ' . $whatStatus . ' = :status WHERE id=:id;');
 
         foreach ($binds as $key => $value) {
@@ -73,13 +73,13 @@ if (isset($_GET['deleteID'])) {
     header('Location: index.php');
 }
 
-if (isset($_GET['toggleskip'])) {
-    toggleStatus((int)$_GET['toggleskip'], 'skip', $db);
+if (isset($_GET['toggleSkip'])) {
+    toggleStatus((int)$_GET['toggleSkip'], 'skip', $db);
     header('Location: index.php');
 }
 
-if (isset($_GET['toggledone'])) {
-    toggleStatus((int)$_GET['toggledone'], 'done', $db);
+if (isset($_GET['toggleDone'])) {
+    toggleStatus((int)$_GET['toggleDone'], 'done', $db);
     header('Location: index.php');
 }
 
