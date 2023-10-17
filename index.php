@@ -6,9 +6,8 @@ spl_autoload_register(function ($class) {
     require $file;
 });
 
-include("model/todoElement.php");
-
 use model\Todo;
+use template\TemplateEngine;
 
 $db = new SQLite3('todo.db');
 
@@ -86,35 +85,18 @@ if (isset($_GET['toggleDone'])) {
     header('Location: index.php');
 }
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Todos</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<h1>Todos</h1>
-<div id="create-todo">
-    <form method="post" action="index.php">
-        <label for="new-todo-text">Todo Text: </label>
-        <input type="text" id="new-todo-text"
-               placeholder="create new todo" name="todoText" required>
-        <input type="hidden" name="createTodo" value="1">
-        <input class="button" id="new-todo" type="submit" value="Submit">
-    </form>
-</div>
-<div id="app">
-    <?php
     $stmt = $db->prepare('SELECT * FROM todo');
     $items = $stmt->execute();
-
+    $todoViews = array();
     while ($row = $items->fetchArray()) {
         $todo = new Todo($row['text'], (bool)$row['done'], (bool)$row['skip'], $row['id']);
-        print(model\generateNode($todo)->saveHTML());
+        $todoViews[] = TemplateEngine::render_view('todo', [
+           'id' => $todo->id,
+           'text' => $todo->text,
+            'doneChecked' => $todo->done ? 'checked': '',
+            'skipChecked' => $todo->skip ? 'checked': '',
+        ]);
     }
-    ?>
-</div>
-</body>
-</html>
+    print(TemplateEngine::render_view('index', [
+            'app' => implode($todoViews),
+    ]));

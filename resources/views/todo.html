@@ -1,0 +1,15 @@
+<div class="todo">
+    <form action="index.php">
+        <input id="done-button#{{id}}" name="toggleDone" style="display: none" type="submit" value="{{id}}"/>
+        <label for="done-button#{{id}}"> <input type="checkbox" {{doneChecked}}/> Done </label>
+
+        <input id="skip-button#{{id}}" name="toggleSkip" style="display: none" type="submit" value="{{id}}"/>
+        <label for="skip-button#{{id}}"> <input type="checkbox" {{skipChecked}}/> Skip </label>
+
+        <input id="delete-button#{{id}}" name="deleteID" type="submit" value="{{id}}"/>
+        <label for="delete-button#{{id}}"> Delete </label>
+    </form>
+    <p>
+        {{text}}
+    </p>
+</div>
