@@ -88,7 +88,7 @@ function generateNode(Todo $todo): DOMDocument {
         $dom->append($div);
         return $dom;
     } catch (DOMException $e) {
-        $dom->textContent = $e;
+        $dom->textContent = (string)$e;
         return $dom;
     }
 }
