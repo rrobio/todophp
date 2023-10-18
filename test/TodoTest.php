@@ -1,7 +1,6 @@
 <?php
 
 namespace test;
-include "../model/Todo.php";
 
 use App\Model\Todo;
 use PHPUnit\Framework\TestCase;
