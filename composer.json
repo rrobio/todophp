@@ -15,5 +15,8 @@
             "email": "orlandinirobi@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^8.2",
+        "ext-sqlite3": "^8.2"
+    }
 }
