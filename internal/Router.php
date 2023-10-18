@@ -4,6 +4,7 @@ namespace internal;
 
 use controllers\Controller;
 use controllers\Error;
+use Exception;
 
 class Router
 {
@@ -92,7 +93,7 @@ class Router
         for ($i = 0; $i < count($uriParts); $i++) {
             $value = explode('=', $uriParts[$i]);
             if (!in_array($value[0], $parts)) {
-                throw new \Exception('invalid parameters');
+                throw new Exception('invalid parameters');
             }
             $args += [$value[0] => $value[1]];
         }

@@ -7,7 +7,7 @@ use template\TemplateEngine;
 class Error implements Controller
 {
 
-    public function __construct(private int $error)
+    public function __construct(private readonly int $error)
     {
     }
 
