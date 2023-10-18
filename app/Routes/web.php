@@ -21,13 +21,13 @@ Router::get('/toggleDoneTodo?{id}', function (?string $id) {
 
 Router::get('/createTodo?{text}', function (?string $text) {
     $db = new SQLite3('todo.db');
-    $ret = Todo::insertTodo($text ?? 'empty', $db);
+    Todo::insertTodo($text ?? 'empty', $db);
     header('Location: /');
 });
 
 Router::get('/deleteTodo?{id}', function (?string $id) {
     $db = new SQLite3('todo.db');
-    $ret = Todo::removeTodo($id, $db);
+    Todo::removeTodo($id, $db);
     header('Location: /');
 });
 
