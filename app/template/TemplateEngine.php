@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Template;
 
 
+use Exception;
+
 const VIEWS = __DIR__ . '/../Resources/views';
 class TemplateEngine
 {
@@ -20,7 +22,7 @@ class TemplateEngine
     {
         $file = VIEWS . '/' . $view . '.html'; // FIXME: remove hardcoded extension
         if (!file_exists($file)) {
-            throw new \Exception("file $file does not exist");
+            throw new Exception("file $file does not exist");
         }
 
         $contents = file_get_contents($file);
