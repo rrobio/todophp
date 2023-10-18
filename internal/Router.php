@@ -20,20 +20,21 @@ class Router
     {
         $uri = Router::trimSlashes($uri);
         $matches = array();
-        if (preg_match('/(.*)(\{.*})/', $uri, $matches)) {
-            $uri = implode("", array_map(function ($a) {
-                return preg_replace('/({.*})/', '(.*)', $a);
-            }, array_slice($matches, 0, 1)));
 
+        //get base uri in first capture group and all the parameters in the next capture group
+        preg_match('/(.*)\?\{(.*)}/', $uri, $matches);
+
+        if ($matches) { // contains parameters
+            $uri = $matches[1]; // get uri without parameters
         }
-        array_splice($matches, 0, 1);
-        if (is_callable($controller)) {
-            Router::$routes += [$uri => [$controller, $matches]];
-        } elseif (class_exists($controller)) {
-            Router::$routes += [$uri => [new $controller, $matches]];
-        } else {
-            Router::$routes += [$uri => [$controller, $matches]];
+        // drop matched text and base uri, otherwise it's just an empty array
+        array_splice($matches, 0, 2);
+
+        // if it's a class instantiate it
+        if (is_string($controller) && class_exists($controller)) {
+            $controller = new $controller;
         }
+        Router::$routes += [$uri => [$controller, $matches]];
     }
 
     private static function trimSlashes(string $uri): string
@@ -49,18 +50,20 @@ class Router
     public function serve(): void
     {
         $uri = $this->getUri();
+        $uriParts = explode('?', $uri);
+
+        $uriBase = $uriParts[0]; // get base uri
+        $uriArgs = array_slice($uriParts, 1); // get the rest of the uri ie the parameters
 
         foreach (Router::$routes as $route => $controller) {
-            if (!preg_match('/\*/', $route)) { // has no parts
-                var_dump($route);
-                if ($route === $uri) {
+            if (!str_contains($uri, '=')) { // has no parameters
+                if ($route === $uriBase) {
                     $this->handleController($route, $controller[0]);
                     return;
                 }
-            } else {
-                var_dump($route);
-                $args = $this->mapArgs($uri, $controller[1]);
-                $this->handleController($route, $controller[0](...$args));
+            } elseif ($route === $uriBase) {
+                $args = $this->mapArgs($uriArgs[0], $controller[1]);
+                $this->handleController($uri, $controller[0](...$args));
                 return;
             }
         }
@@ -83,20 +86,23 @@ class Router
 
     private function mapArgs(string $uri, array $parts): array
     {
-        $route_parts = explode('/', $uri);
-        $args = [];
-        for ($i = 0; $i < count($parts); $i++) {
-           if (str_contains($parts[$i], '{')) {
-               $part = preg_replace('/[{}]/', '', $parts[$i]);
-               $args += [ $part => $route_parts[$i]];
-           }
+        $uriParts = explode('&', $uri);
+
+        $args = array();
+        for ($i = 0; $i < count($uriParts); $i++) {
+            $value = explode('=', $uriParts[$i]);
+            if (!in_array($value[0], $parts)) {
+               throw new \Exception('invalid parameters');
+            }
+            $args += [$value[0] => $value[1]];
         }
         return $args;
     }
 
     private function handleError(int $err): void
     {
-        print((new Error($err))->handle(''));
+        $errorHandler = new Error($err);
+        print($errorHandler(''));
     }
 
 }
