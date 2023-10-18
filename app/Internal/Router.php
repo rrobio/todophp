@@ -80,6 +80,7 @@ class Router
     private function handleController(string $route, $controller): void
     {
         match (gettype($controller)) {
+            'NULL', =>  new Exception('controller should not be null'),
             'string' => print($controller),
             'object' => print($controller($route)), // classes and callbacks
         };
