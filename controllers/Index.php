@@ -9,7 +9,7 @@ use template\TemplateEngine;
 class Index implements Controller
 {
 
-    public function handle(string $uri): string
+    public function __invoke(string $uri): string
     {
 
         $db = new SQLite3('todo.db');

@@ -75,14 +75,9 @@ class Router
 
     private function handleController(string $route, $controller): void
     {
-        if (is_callable($controller)) {
-            print($controller());
-            return;
-        }
         match (gettype($controller)) {
-            'NULL' => print(''),
             'string' => print($controller),
-            'object' => print($controller->handle($route)),
+            'object' => print($controller($route)), // classes and callbacks
         };
     }
 

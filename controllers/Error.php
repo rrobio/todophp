@@ -11,7 +11,7 @@ class Error implements Controller
     {
     }
 
-    public function handle(string $uri): string
+    public function __invoke(string $uri): string
     {
         return match ($this->error) {
             404 => TemplateEngine::render_view('404', []),

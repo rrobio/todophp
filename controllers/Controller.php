@@ -4,5 +4,5 @@ namespace controllers;
 
 interface Controller
 {
-    public function handle(string $uri): string;
+    public function __invoke(string $uri): string;
 }
