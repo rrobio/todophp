@@ -1,0 +1,19 @@
+<div class="todo">
+    <form action="toggleDoneTodo">
+        <input id="done-button#{{id}}" name="id" style="display: none" type="submit" value="{{id}}"/>
+        <label for="done-button#{{id}}"> <input type="checkbox" {{doneChecked}}/> Done </label>
+    </form>
+
+    <form action="toggleSkipTodo">
+        <input id="skip-button#{{id}}" name="id" style="display: none" type="submit" value="{{id}}"/>
+        <label for="skip-button#{{id}}"> <input type="checkbox" {{skipChecked}}/> Skip </label>
+    </form>
+
+    <form action="deleteTodo">
+        <input id="delete-button#{{id}}" name="id" type="submit" value="{{id}}"/>
+        <label for="delete-button#{{id}}"> Delete </label>
+    </form>
+    <p>
+        {{text}}
+    </p>
+</div>

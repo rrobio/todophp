@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>-->
+    <meta charset="UTF-8">
+    <title>Todos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Todos</h1>
+<!-- {{todoCreateForm}} -->
+<div id="create-todo">
+    <form action="createTodo">
+        <input id="new-todo-text" name="text" type="text">
+        <button id="new-todo" type="submit">Create Todo</button>
+    </form>
+    <label for="filter-select"> Filter </label>
+    <select id="filter-select" name="filter">
+        <option value="all">All</option>
+        <option value="done">Done</option>
+        <option value="skip">Skip</option>
+    </select>
+</div>
+<div id="app">
+    {{app}}
+</div>
+</body>
+</html>

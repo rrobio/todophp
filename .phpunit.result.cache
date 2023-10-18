@@ -1,1 +1,0 @@
-{"version":1,"defects":{"test\\TodoTest::test__construct":8,"test\\TodoTest::test__constructWithNullID":7,"test\\TodoTest::testToggleTodo":8,"test\\TodoTest::testToggleSkip":8},"times":{"test\\TodoTest::test__construct":0.001,"test\\TodoTest::testToggleTodo":0,"test\\TodoTest::testToggleSkip":0,"test\\TodoTest::test__constructWithNullID":0}}

@@ -3,7 +3,7 @@
 namespace test;
 include "../model/Todo.php";
 
-use model\Todo;
+use App\Model\Todo;
 use PHPUnit\Framework\TestCase;
 
 class TodoTest extends TestCase
