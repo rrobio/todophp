@@ -12,9 +12,9 @@ class Router
     //  => ['/deleteTodo/id' => [callback, [ 'id' ]]
     static protected array $routes = array();
 
-    public function __construct()
+    public function __construct(string $path)
     {
-        include_once(BASE_DIR . '/app/Routes/web.php');
+        include_once(BASE_DIR . $path);
     }
 
     public static function get(string $uri, string|Controller|callable $controller): void
