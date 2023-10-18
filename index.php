@@ -12,6 +12,12 @@ const BASE_DIR = __DIR__;
 $router = new Router();
 $router->serve();
 
+
+function dd($array, $name = 'var') {
+    highlight_string("<?php\n\$$name =\n" . var_export($array, true) . ";\n?>");
+    die();
+}
+
 //
 function insertTodo(Todo $todo, SQLite3 $db): bool
 {
