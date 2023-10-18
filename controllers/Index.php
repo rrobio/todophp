@@ -26,6 +26,7 @@ class Index implements Controller
                 'skipChecked' => $todo->skip ? 'checked' : '',
             ]);
         }
+
         return TemplateEngine::render_view('index', [
             'app' => implode($todoViews),
         ]);

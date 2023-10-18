@@ -34,7 +34,9 @@ class TodoTest extends TestCase
         $this->assertSame($todo->done, false);
         $this->assertSame($todo->skip, false);
     }
-    public function test__constructWithNullID() {
+
+    public function test__constructWithNullID()
+    {
         $todo = new Todo("example", true, true);
         $this->assertNotNull($todo);
     }

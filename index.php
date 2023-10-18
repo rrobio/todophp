@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use internal\Router;
+use JetBrains\PhpStorm\NoReturn;
 use model\Todo;
 
 spl_autoload_register(function ($class) {
@@ -13,12 +14,12 @@ $router = new Router();
 $router->serve();
 
 
-function dd($array, $name = 'var') {
+#[NoReturn] function dd($array, $name = 'var'): never
+{
     highlight_string("<?php\n\$$name =\n" . var_export($array, true) . ";\n?>");
     die();
 }
 
-//
 function insertTodo(Todo $todo, SQLite3 $db): bool
 {
     $binds = array(
@@ -36,6 +37,7 @@ function insertTodo(Todo $todo, SQLite3 $db): bool
     $ret = $stmt->execute();
     return is_object($ret);
 }
+
 //
 function removeTodo(int $id, SQLite3 $db): bool
 {
@@ -45,6 +47,7 @@ function removeTodo(int $id, SQLite3 $db): bool
     $result = $stmt->execute();
     return is_object($result);
 }
+
 function toggleStatus(int $id, string $status, SQLite3 $db): bool
 {
     $stmt = $db->prepare('SELECT * FROM todo WHERE id=:id;');
