@@ -4,10 +4,10 @@ namespace App\Controllers;
 
 use App\Template\TemplateEngine;
 
-class Error implements Controller
+readonly class Error implements Controller
 {
 
-    public function __construct(private readonly int $error)
+    public function __construct(private int $error)
     {
     }
 
